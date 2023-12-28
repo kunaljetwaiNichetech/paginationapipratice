@@ -7,6 +7,11 @@ export default function Pagii() {
   const [allPost, setallPost] = useState([]);
   const [cpage, setcpage] = useState(1);
   const [perpage, setperpage] = useState(5);
+
+  const [pagenumberlimit, setpagenumberlimit] = useState(5);
+  const [maxpage, setmaxpage] = useState(5);
+  const [minpage, setminpage] = useState(0);
+
   useEffect(() => {
     async function fetchData() {
       // You can await here
@@ -23,12 +28,28 @@ export default function Pagii() {
   const post = allPost.slice(fpage, lastpost);
   console.log("thisiiisisisisisisisisi", allPost.slice(fpage, lastpost));
   const allPostLength = allPost.length;
-  // this is for paginations
+  // this is for paginations ceil method is used to roound near intiger
   let pages = [];
   for (let i = 1; i <= Math.ceil(allPostLength / perpage); i++) {
     pages.push(i);
     // console.log(i);
   }
+
+  const handelNext = () => {
+    setcpage(cpage + 1);
+    if (cpage + 1 > maxpage) {
+      setmaxpage(maxpage + pagenumberlimit);
+      setminpage(minpage + pagenumberlimit);
+    }
+  };
+  const handelback = () => {
+    setcpage(cpage - 1);
+    if ((cpage - 1) % pagenumberlimit === 0) {
+      setmaxpage(maxpage - pagenumberlimit);
+      setminpage(minpage - pagenumberlimit);
+    }
+  };
+
   return (
     <div>
       <div>
@@ -56,9 +77,9 @@ export default function Pagii() {
       {/* this are buttons  forn  pages change */}
 
       <button onClick={() => setcpage(1)}>firstpage</button>
-      <button onClick={() => setcpage(cpage + 1)}>Next</button>
+      <button onClick={handelback}>back</button>
       {pages.map((page, index) => {
-        if (index <= 4) {
+        if (index < maxpage + 1 && index > minpage) {
           return (
             <>
               <button key={index} onClick={() => setcpage(page)}>
@@ -66,17 +87,19 @@ export default function Pagii() {
               </button>
             </>
           );
+        } else {
+          return null;
         }
       })}
-      <button onClick={() => setcpage(cpage - 1)}>back</button>
+
+      <button onClick={handelNext}>Next</button>
       <button onClick={() => setcpage(pages.length)}>lastpage</button>
     </div>
   );
 }
-
 // first declare the curent page and page per content and then  set last page as curnt page * perpage
 // then f page as last page - perpage
 // then slice all post
 // pagination empty list then loop for  alldata/perpage
 // push i
-// map for pagesh list and map accordinflingy.....
+// map for pagesh list and map accordinflin

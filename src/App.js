@@ -17,10 +17,7 @@ function App() {
 
   return (
     <div className="App">
-    
       <Pagii/>
-
-    
     </div>
   );
 }
