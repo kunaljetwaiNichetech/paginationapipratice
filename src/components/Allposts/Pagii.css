@@ -1,0 +1,11 @@
+button.active {
+    background: black;
+    color: white;
+}
+button {
+    padding: 3px;
+    width: 24px;
+}
+svg {
+    padding: 2px;
+}

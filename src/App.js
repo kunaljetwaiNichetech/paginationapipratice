@@ -2,9 +2,8 @@
 
 import './App.css';
 import Pagii from './components/Allposts/Pagii';
+import Forms from './components/Forms/Forms';
 function App() {
-  
- 
 //  let a,b,c,d
 //  console.log(a = Math.ceil(1.99));   // Result is 2.0
 //  console.log(b = Math.ceil(1.01));   // Result is 2.0
@@ -18,6 +17,7 @@ function App() {
   return (
     <div className="App">
       <Pagii/>
+      {/* <Forms/> */}
     </div>
   );
 }
